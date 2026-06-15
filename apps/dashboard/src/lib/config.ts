@@ -1,4 +1,4 @@
-export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/clawshield/clawshield";
+export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://https://github.com/let-the-dreamers-rise/clawshield";
 export const LANDING_URL = process.env.NEXT_PUBLIC_LANDING_URL ?? "http://localhost:3001";
 
 export const CONTRACTS = {

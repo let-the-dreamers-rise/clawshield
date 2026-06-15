@@ -1,0 +1,4 @@
+{
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm --filter @clawshield/core --filter @clawshield/ui build && pnpm --filter @clawshield/dashboard build"
+}

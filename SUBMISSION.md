@@ -82,8 +82,8 @@ pnpm dev:landing        # http://localhost:3001
 | Resource | URL |
 |----------|-----|
 | GitHub | https://github.com/let-the-dreamers-rise/clawshield |
-| Live Dashboard | *(fill Vercel URL before submit)* |
-| Landing Page | *(fill Vercel URL before submit)* |
+| Live Dashboard | https://dashboard-ashwin-goyals-projects.vercel.app |
+| Landing Page | https://landing-ashwin-goyals-projects.vercel.app |
 | Demo Video | *(fill YouTube/Loom URL before submit)* |
 | Mantlescan (Sepolia) | https://sepolia.mantlescan.xyz |
 | DecisionRegistry | https://sepolia.mantlescan.xyz/address/0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316 |

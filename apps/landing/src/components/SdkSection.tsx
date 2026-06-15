@@ -12,7 +12,8 @@ export function SdkSection() {
               guard pipeline, receipt writing — all typed and composable.
             </p>
             <p className="mt-4 text-sm text-text-dim">
-              Install via OpenClaw skill: <code className="text-cyan">npx skills add clawshield</code>
+              Clone repo + <code className="text-cyan">pnpm install</code>; OpenClaw skill:{" "}
+              <code className="text-cyan">npx skills add ./packages/openclaw-skill</code>
             </p>
           </div>
 
@@ -27,15 +28,17 @@ export function SdkSection() {
               <code>
                 <span className="text-text-dim">{"// Add ClawShield to any agent action\n"}</span>
                 <span className="text-cyan">import</span>
-                <span className="text-text">{" { guard } "}</span>
+                <span className="text-text">{" { ClawShield } "}</span>
                 <span className="text-cyan">from</span>
                 <span className="text-emerald">{' "@clawshield/sdk"'}</span>
                 <span className="text-text-dim">;</span>
                 {"\n\n"}
                 <span className="text-cyan">const</span>
+                <span className="text-text">{" shield = new ClawShield({ agentId, policy });"}{"\n"}</span>
+                <span className="text-cyan">const</span>
                 <span className="text-text">{" result = "}</span>
                 <span className="text-cyan">await</span>
-                <span className="text-text">{" guard(action, policy);"}{"\n"}</span>
+                <span className="text-text">{" shield.guard(action);"}{"\n"}</span>
                 <span className="text-cyan">if</span>
                 <span className="text-text">{" (result.verdict === "}</span>
                 <span className="text-emerald">&apos;BLOCK&apos;</span>
@@ -43,7 +46,7 @@ export function SdkSection() {
                 <span className="text-cyan">else</span>
                 <span className="text-text">{" "}</span>
                 <span className="text-cyan">await</span>
-                <span className="text-text">{" executeIfAllowed(result);"}{"\n"}</span>
+                <span className="text-text">{" shield.executeIfAllowed(result);"}{"\n"}</span>
               </code>
             </pre>
           </div>

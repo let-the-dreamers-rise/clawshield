@@ -16,36 +16,53 @@ export default function DevelopersPage() {
           Developer <span className="text-gradient">resources</span>
         </h1>
         <p className="mt-4 text-lg text-text-muted">
-          SDK, React hooks, API reference, and OpenClaw skill — integrate safety in minutes
+          SDK, React hooks, API reference, and OpenClaw skill — integrate safety from the monorepo
         </p>
 
         <section className="mt-12 rounded-xl border border-border bg-surface p-6">
-          <h2 className="text-xl font-semibold">Quick Install</h2>
+          <h2 className="text-xl font-semibold">Install from monorepo</h2>
+          <p className="mt-2 text-sm text-text-dim">
+            Packages are pnpm workspace modules — not on npm yet (publish planned post-hackathon).
+            Clone the repo, install, and build; then import via workspace names like{" "}
+            <code className="text-emerald">@clawshield/sdk</code>.
+          </p>
           <pre className="mt-4 overflow-x-auto rounded-lg bg-background p-4 font-mono text-sm text-text-muted">
-{`# Core SDK
-npm install @clawshield/sdk
+{`git clone ${GITHUB_URL}.git
+cd clawshield
+pnpm install
+pnpm build
 
-# React hooks + UI components
-npm install @clawshield/react @clawshield/ui
-
-# OpenClaw / Byreal skill (one command)
-npx skills add clawshield`}
+# OpenClaw skill (local path — skill.manifest.json in packages/openclaw-skill/)
+npx skills add ./packages/openclaw-skill`}
           </pre>
         </section>
 
         <section className="mt-10">
           <h2 className="text-xl font-semibold">Guard SDK</h2>
           <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-surface p-4 font-mono text-sm text-text-muted">
-{`import { guard, executeIfAllowed, writeReceipt } from "@clawshield/sdk";
+{`import { ClawShield } from "@clawshield/sdk";
+import { DEFAULT_POLICY } from "@clawshield/core";
 
-const result = await guard(action, policy);
+const shield = new ClawShield({
+  agentId: "my-agent",
+  policy: DEFAULT_POLICY,
+  portfolioUsd: 10_000,
+  demoMode: true,
+});
+
+const result = await shield.guard({
+  type: "swap",
+  tokenIn: "USDC",
+  tokenOut: "SOL",
+  amountUsd: 50,
+  slippageBps: 50,
+});
 
 if (result.verdict === "BLOCK") {
-  // Agent reads reasonCodes and replans
   console.log(result.reasonCodes);
 } else {
-  const txHash = await executeIfAllowed(result);
-  await writeReceipt(result);
+  const exec = await shield.executeIfAllowed(result);
+  console.log(exec.execTxRef, exec.mantleTxHash);
 }`}
           </pre>
         </section>
@@ -55,11 +72,24 @@ if (result.verdict === "BLOCK") {
           <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-surface p-4 font-mono text-sm text-text-muted">
 {`import { useGuard, useAgentScore } from "@clawshield/react";
 
-// Guard hook — evaluate actions in React
-const { guard, result, loading } = useGuard({ policy });
+const { guard, result, loading } = useGuard({
+  baseUrl: "http://localhost:3000",
+  policy: DEFAULT_POLICY,
+});
 
-// Agent score hook — live reputation polling
-const { score } = useAgentScore({ agentId: "agent-001", pollInterval: 30000 });`}
+await guard({
+  type: "swap",
+  tokenIn: "USDC",
+  tokenOut: "SOL",
+  amountUsd: 200,
+  slippageBps: 30,
+});
+
+const { score } = useAgentScore({
+  agentId: "agent-001",
+  baseUrl: "http://localhost:3000",
+  pollInterval: 30_000,
+});`}
           </pre>
         </section>
 
@@ -87,10 +117,12 @@ const { score } = useAgentScore({ agentId: "agent-001", pollInterval: 30000 });`
         <section className="mt-10 rounded-xl border border-emerald/20 bg-emerald/5 p-6">
           <h2 className="text-xl font-semibold text-emerald">OpenClaw Skill</h2>
           <p className="mt-2 text-sm text-text-muted">
-            Wrap any Byreal/OpenClaw agent with ClawShield guard in one command. The skill intercepts
-            money-touching actions, runs policy + simulation, and writes receipts to Mantle.
+            After cloning and building the repo, install the skill from{" "}
+            <code className="text-emerald">packages/openclaw-skill/</code> (manifest at{" "}
+            <code className="text-emerald">skill.manifest.json</code>). It intercepts money-touching
+            actions, runs policy + simulation, and writes receipts to Mantle.
           </p>
-          <pre className="mt-4 font-mono text-sm text-emerald">npx skills add clawshield</pre>
+          <pre className="mt-4 font-mono text-sm text-emerald">npx skills add ./packages/openclaw-skill</pre>
         </section>
 
         <div className="mt-10 flex flex-wrap gap-4">

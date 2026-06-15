@@ -96,32 +96,54 @@ Copy `.env.example` to `.env` at the repo root. Dashboard reads `NEXT_PUBLIC_*` 
 
 ## SDK Usage
 
+Packages are **pnpm workspace modules** in this monorepo — not published to npm yet (publish planned post-hackathon). After `pnpm install && pnpm build`, import via workspace names:
+
 ```typescript
 import { ClawShield } from "@clawshield/sdk";
+import { DEFAULT_POLICY } from "@clawshield/core";
 
-const shield = new ClawShield({ policy, mantle });
-
-const result = await shield.guardAction({
-  type: "swap",
+const shield = new ClawShield({
   agentId: "agent-1",
-  inputToken: "USDC",
-  outputToken: "SOL",
+  policy: DEFAULT_POLICY,
+  portfolioUsd: 10_000,
+  demoMode: true,
+});
+
+const result = await shield.guard({
+  type: "swap",
+  tokenIn: "USDC",
+  tokenOut: "SOL",
   amountUsd: 50,
+  slippageBps: 50,
 });
 
 if (result.verdict === "BLOCK") {
   // Agent reads result.reasonCodes and replans
+} else {
+  const exec = await shield.executeIfAllowed(result);
+  // exec.execTxRef (Solana), exec.mantleTxHash (receipt)
 }
+```
 
-const txHash = await shield.executeIfAllowed(result);
-await shield.writeReceipt(result, txHash);
+Standalone policy check (no execution):
+
+```typescript
+import { guard } from "@clawshield/sdk";
+
+const result = await guard(action, policy, { portfolioUsd: 10_000 });
 ```
 
 ## OpenClaw Skill
 
+Install from the repo path (skill manifest at `packages/openclaw-skill/skill.manifest.json`):
+
 ```bash
-npx skills add @clawshield/openclaw-skill
-clawshield-guard agent-1 USDC SOL 50
+# from repo root after pnpm install && pnpm build
+npx skills add ./packages/openclaw-skill
+
+# Or run the skill CLI directly
+pnpm --filter @clawshield/openclaw-skill build
+node packages/openclaw-skill/dist/cli.js agent-1 USDC SOL 50 --demo
 ```
 
 ## Contracts (Mantle Sepolia)
@@ -181,7 +203,7 @@ clawshield/
 │   ├── clawshield-sdk/      # guard() API
 │   ├── ui/                  # Shared React components
 │   ├── adapters/            # Byreal + Mantle
-│   └── openclaw-skill/      # npx skills add
+│   └── openclaw-skill/      # OpenClaw skill (local install)
 ├── contracts/               # Foundry/Hardhat Solidity
 ├── apps/
 │   ├── agent/               # Multi-agent CLI + arena

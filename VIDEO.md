@@ -131,7 +131,7 @@
 |---|---|
 | **Screen** | Landing hero + GitHub repo + live dashboard URL |
 | **Voice** | "Every autonomous agent that touches money needs a guardrail, a black box, and a public reputation. ClawShield Verified. Built on Byreal and Mantle." |
-| **On-screen text** | `github.com/clawshield/clawshield` · `#MantleAIHackathon` |
+| **On-screen text** | `https://github.com/let-the-dreamers-rise/clawshield` · `#MantleAIHackathon` |
 
 ---
 

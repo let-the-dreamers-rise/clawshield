@@ -47,7 +47,7 @@ ClawShield Verified = soulbound badge marketplaces filter on
 getClawShieldScore(agentId) — composable on-chain trust
 
 📊 Dashboard: [URL]
-💻 GitHub: https://github.com/clawshield/clawshield
+💻 GitHub: https://https://github.com/let-the-dreamers-rise/clawshield
 🔗 Contracts: sepolia.mantlescan.xyz
 
 #MantleAIHackathon

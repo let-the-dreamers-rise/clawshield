@@ -88,7 +88,7 @@ pnpm install && pnpm preflight && pnpm demo
 ```
 
 - **Dashboard:** *(Vercel URL)* — live feed, risk math, arena, `/verify` badge criteria
-- **GitHub:** https://github.com/clawshield/clawshield
+- **GitHub:** https://https://github.com/let-the-dreamers-rise/clawshield
 - **Video:** *(link)* — 3:30 walkthrough hitting all 9 criteria ([script](VIDEO.md))
 - **Scorecard:** [SCORECARD.md](SCORECARD.md) — criterion-by-criterion proof map
 

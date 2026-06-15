@@ -3,48 +3,104 @@
 import { useState } from "react";
 import { PageTransition } from "@/components/shared/PageTransition";
 import { cn } from "@/lib/utils";
+import { GITHUB_URL } from "@/lib/config";
 
 const TABS = ["guard", "hooks", "api"] as const;
 type Tab = (typeof TABS)[number];
 
+const INSTALL_SNIPPET = `# Clone the monorepo (packages are not on npm yet)
+git clone ${GITHUB_URL}.git
+cd clawshield
+pnpm install
+pnpm build
+
+# Packages are pnpm workspace modules; npm publish coming post-hackathon.
+# In this repo, import via workspace names, e.g. "@clawshield/sdk".
+
+# OpenClaw skill — install from repo path (skill.manifest.json)
+npx skills add ./packages/openclaw-skill`;
+
 const CODE_EXAMPLES: Record<Tab, { title: string; lang: string; code: string }[]> = {
   guard: [
     {
-      title: "Basic guard() usage",
+      title: "ClawShield class — guard + execute pipeline",
       lang: "typescript",
-      code: `import { guard, executeIfAllowed, writeReceipt } from "@clawshield/sdk";
+      code: `import { ClawShield } from "@clawshield/sdk";
+import { DEFAULT_POLICY } from "@clawshield/core";
 
-const result = await guard({
+const shield = new ClawShield({
   agentId: "my-agent",
-  actionType: "swap",
+  policy: DEFAULT_POLICY,
+  portfolioUsd: 10_000,
+  demoMode: true, // replays demo-capture.json without live keys
+});
+
+const action = {
+  type: "swap" as const,
+  tokenIn: "USDC",
+  tokenOut: "SOL",
+  amountUsd: 50,
+  slippageBps: 50,
+};
+
+const result = await shield.guard(action);
+
+if (result.verdict === "BLOCK") {
+  console.log("Blocked:", result.reasonCodes);
+} else {
+  const exec = await shield.executeIfAllowed(result);
+  console.log("Tx:", exec.execTxRef, "Receipt:", exec.mantleTxHash);
+}`,
+    },
+    {
+      title: "Standalone guard() — policy evaluation only",
+      lang: "typescript",
+      code: `import { guard } from "@clawshield/sdk";
+import type { PolicyConfig, ProposedAction } from "@clawshield/core";
+
+const policy: PolicyConfig = {
+  allowlist: ["USDC", "SOL", "USDT", "mSOL", "JUP"],
+  blocklist: ["SCAM", "RUG"],
+  maxSlippageBps: 100,
+  maxExposurePct: 25,
+  maxDailySpendUsd: 500,
+  minLiquidityUsd: 50_000,
+  warnRiskThreshold: 50,
+  blockRiskThreshold: 70,
+};
+
+const action: ProposedAction = {
+  type: "swap",
   tokenIn: "USDC",
   tokenOut: "SOL",
   amountUsd: 500,
   slippageBps: 50,
-});
-
-if (result.verdict === "BLOCK") {
-  console.log("Blocked:", result.reasonCodes);
-  // Agent replans with safer parameters
-} else {
-  const txHash = await executeIfAllowed(result);
-  const receipt = await writeReceipt(result);
-}`,
-    },
-    {
-      title: "Policy configuration",
-      lang: "typescript",
-      code: `import { guard } from "@clawshield/sdk";
-
-const policy = {
-  allowlist: ["USDC", "SOL", "ETH"],
-  maxSlippageBps: 100,
-  maxExposurePct: 25,
-  maxDailySpendUsd: 5000,
-  minLiquidityUsd: 50000,
 };
 
-const result = await guard(action, policy);`,
+const result = await guard(action, policy, {
+  portfolioUsd: 10_000,
+  poolLiquidityUsd: 50_000,
+});`,
+    },
+    {
+      title: "Express middleware",
+      lang: "typescript",
+      code: `import express from "express";
+import { clawshieldExpressMiddleware } from "@clawshield/sdk/middleware";
+import { DEFAULT_POLICY } from "@clawshield/core";
+
+const app = express();
+app.use(express.json());
+
+app.post(
+  "/trade",
+  clawshieldExpressMiddleware({
+    policy: DEFAULT_POLICY,
+    portfolioUsd: 10_000,
+    onBlock: (result) => console.warn("Blocked:", result.reasonCodes),
+  }),
+  (req, res) => res.json({ status: "executed", action: req.body.action })
+);`,
     },
   ],
   hooks: [
@@ -55,13 +111,22 @@ const result = await guard(action, policy);`,
 
 function SwapButton() {
   const { guard, result, loading } = useGuard({
-    policy: { maxSlippageBps: 100 },
+    baseUrl: "http://localhost:3000", // dashboard /api/guard
+    policy: {
+      allowlist: ["USDC", "SOL"],
+      blocklist: ["SCAM", "RUG"],
+      maxSlippageBps: 100,
+      maxExposurePct: 25,
+      maxDailySpendUsd: 500,
+      minLiquidityUsd: 50_000,
+      warnRiskThreshold: 50,
+      blockRiskThreshold: 70,
+    },
   });
 
   const handleSwap = async () => {
     const res = await guard({
-      agentId: "my-agent",
-      actionType: "swap",
+      type: "swap",
       tokenIn: "USDC",
       tokenOut: "SOL",
       amountUsd: 200,
@@ -86,7 +151,11 @@ function SwapButton() {
 import { ClawShieldVerifiedBadge } from "@clawshield/ui";
 
 function AgentCard({ agentId }: { agentId: string }) {
-  const { score, loading } = useAgentScore({ agentId, pollInterval: 30000 });
+  const { score, loading } = useAgentScore({
+    agentId,
+    baseUrl: "http://localhost:3000",
+    pollInterval: 30_000,
+  });
 
   if (loading) return <div>Loading...</div>;
 
@@ -104,12 +173,11 @@ function AgentCard({ agentId }: { agentId: string }) {
     {
       title: "POST /api/guard",
       lang: "bash",
-      code: `curl -X POST https://dashboard.clawshield.xyz/api/guard \\
+      code: `curl -X POST http://localhost:3000/api/guard \\
   -H "Content-Type: application/json" \\
   -d '{
     "action": {
-      "agentId": "agent-001",
-      "actionType": "swap",
+      "type": "swap",
       "tokenIn": "USDC",
       "tokenOut": "SOL",
       "amountUsd": 1000,
@@ -120,7 +188,7 @@ function AgentCard({ agentId }: { agentId: string }) {
     {
       title: "GET /api/agents/:id/score",
       lang: "bash",
-      code: `curl https://dashboard.clawshield.xyz/api/agents/agent-safe-002/score
+      code: `curl http://localhost:3000/api/agents/agent-safe-002/score
 
 # Response:
 {
@@ -204,13 +272,18 @@ export default function DocsPage() {
         </div>
 
         <div className="rounded-xl border border-emerald/20 bg-emerald/5 p-6">
-          <h3 className="font-semibold text-emerald">Quick Install</h3>
-          <pre className="mt-3 font-mono text-sm text-text-muted">
-            npm install @clawshield/sdk @clawshield/react @clawshield/ui
-          </pre>
-          <p className="mt-3 text-sm text-text-dim">
-            Or add the OpenClaw skill: <code className="text-emerald">npx skills add clawshield</code>
+          <h3 className="font-semibold text-emerald">Install from monorepo</h3>
+          <p className="mt-2 text-sm text-text-dim">
+            Packages are pnpm workspace modules — not published to npm yet (publish planned post-hackathon).
+            Clone the repo and use workspace imports like <code className="text-emerald">@clawshield/sdk</code>.
           </p>
+          <pre className="mt-3 overflow-x-auto font-mono text-sm text-text-muted">{INSTALL_SNIPPET}</pre>
+          <button
+            onClick={() => copy(INSTALL_SNIPPET, "install")}
+            className="mt-3 text-xs text-text-dim hover:text-emerald"
+          >
+            {copied === "install" ? "Copied!" : "Copy install commands"}
+          </button>
         </div>
       </div>
     </PageTransition>
