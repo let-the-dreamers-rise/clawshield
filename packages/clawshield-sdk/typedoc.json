@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["src/index.ts", "src/docs-entry.ts"],
+  "out": "docs",
+  "name": "ClawShield SDK",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeInternal": true
+}

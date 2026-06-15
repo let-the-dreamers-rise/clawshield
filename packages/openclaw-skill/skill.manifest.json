@@ -1,0 +1,18 @@
+{
+  "skillId": "clawshield-guard",
+  "name": "ClawShield Guard",
+  "version": "1.0.0",
+  "description": "ISO-style safety guard for wallet-native AI agents — policy, risk scoring, Mantle receipts",
+  "author": "ClawShield",
+  "hooks": {
+    "pre-action": "./dist/index.js",
+    "post-action": "./dist/index.js"
+  },
+  "dependencies": {
+    "@clawshield/sdk": "workspace:*"
+  },
+  "config": {
+    "agentId": { "type": "string", "required": true },
+    "demoMode": { "type": "boolean", "default": false }
+  }
+}

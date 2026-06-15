@@ -1,0 +1,46 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8787:8787"
+    environment:
+      PORT: 8787
+      INDEXER_DB_PATH: /data/clawshield.db
+      LOG_LEVEL: info
+      RATE_LIMIT_MAX: 200
+      WEBHOOK_ENABLED: "false"
+    volumes:
+      - clawshield-data:/data
+    depends_on:
+      indexer:
+        condition: service_started
+
+  indexer:
+    build:
+      context: .
+      dockerfile: Dockerfile.indexer
+    environment:
+      INDEXER_DB_PATH: /data/clawshield.db
+      MANTLE_RPC_URL: ${MANTLE_RPC_URL:-https://rpc.sepolia.mantle.xyz}
+      DECISION_REGISTRY_ADDRESS: ${DECISION_REGISTRY_ADDRESS:-0x0000000000000000000000000000000000000000}
+      INDEXER_POLL_MS: 15000
+    volumes:
+      - clawshield-data:/data
+    command: ["node", "packages/indexer/dist/cli.js"]
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://api:8787
+      CLAWSHIELD_API_URL: http://api:8787
+    depends_on:
+      - api
+
+volumes:
+  clawshield-data:

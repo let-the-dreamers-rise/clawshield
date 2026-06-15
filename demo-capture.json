@@ -1,0 +1,177 @@
+{
+  "agentId": "risky-agent",
+  "steps": [
+    {
+      "action": {
+        "type": "swap",
+        "tokenIn": "USDC",
+        "tokenOut": "MEME",
+        "amountUsd": 9500,
+        "slippageBps": 500
+      },
+      "guard": {
+        "action": {
+          "type": "swap",
+          "agentId": "agent-1",
+          "inputToken": "USDC",
+          "outputToken": "MEME",
+          "amountUsd": 9500,
+          "walletBalanceUsd": 10000
+        },
+        "verdict": "BLOCK",
+        "riskScore": 88,
+        "reasonCodes": ["TOKEN_NOT_ALLOWLISTED", "OVEREXPOSED", "SLIPPAGE_EXCEEDED", "THIN_LIQUIDITY", "PRICE_IMPACT_HIGH"],
+        "breakdown": {
+          "priceImpactScore": 85,
+          "slippageScore": 90,
+          "liquidityScore": 75,
+          "exposureScore": 95,
+          "poolRiskScore": 80,
+          "weights": { "priceImpact": 0.35, "slippage": 0.25, "liquidity": 0.25, "exposure": 0.15, "poolRisk": 0.1 }
+        },
+        "simulation": {
+          "priceImpactPct": 42,
+          "slippageBps": 500,
+          "liquidityUsd": 12000,
+          "poolRiskScore": 85,
+          "expectedOutputUsd": 5510,
+          "exposurePct": 95
+        },
+        "decisionHash": "abc123blockeddecisionhash0000000000000000000000000000000001",
+        "timestamp": 1718400000000,
+        "message": "BLOCKED: overexposed swap into illiquid MEME"
+      }
+    },
+    {
+      "action": {
+        "type": "swap",
+        "tokenIn": "USDC",
+        "tokenOut": "SOL",
+        "amountUsd": 25,
+        "slippageBps": 50
+      },
+      "guard": {
+        "action": {
+          "type": "swap",
+          "agentId": "agent-1",
+          "inputToken": "USDC",
+          "outputToken": "SOL",
+          "amountUsd": 25,
+          "walletBalanceUsd": 10000
+        },
+        "verdict": "ALLOW",
+        "riskScore": 12,
+        "reasonCodes": [],
+        "breakdown": {
+          "priceImpactScore": 5,
+          "slippageScore": 8,
+          "liquidityScore": 10,
+          "exposureScore": 3,
+          "poolRiskScore": 15,
+          "weights": { "priceImpact": 0.35, "slippage": 0.25, "liquidity": 0.25, "exposure": 0.15, "poolRisk": 0.1 }
+        },
+        "simulation": {
+          "priceImpactPct": 0.5,
+          "slippageBps": 50,
+          "liquidityUsd": 500000,
+          "poolRiskScore": 15,
+          "expectedOutputUsd": 24.88,
+          "exposurePct": 0.25
+        },
+        "decisionHash": "def456alloweddecisionhash00000000000000000000000000000002",
+        "timestamp": 1718400060000,
+        "message": "ALLOWED: safe SOL swap"
+      },
+      "execTxRef": "5demoSolanaSwapTxHashCapturedFromRealRun1234567890",
+      "mantleTxHash": "0xdemo_mantle_receipt_hash_from_real_run_abc123"
+    },
+    {
+      "action": {
+        "type": "lp_open",
+        "tokenIn": "USDC",
+        "tokenOut": "MEME",
+        "amountUsd": 500,
+        "slippageBps": 100,
+        "poolAddress": "thin-pool-meme-usdc"
+      },
+      "guard": {
+        "action": {
+          "type": "lp_open",
+          "agentId": "agent-1",
+          "inputToken": "USDC",
+          "outputToken": "MEME",
+          "amountUsd": 500,
+          "poolId": "thin-pool-meme-usdc",
+          "walletBalanceUsd": 10000
+        },
+        "verdict": "BLOCK",
+        "riskScore": 76,
+        "reasonCodes": ["THIN_LIQUIDITY", "POOL_RISK_HIGH", "TOKEN_NOT_ALLOWLISTED"],
+        "breakdown": {
+          "priceImpactScore": 40,
+          "slippageScore": 20,
+          "liquidityScore": 90,
+          "exposureScore": 25,
+          "poolRiskScore": 85,
+          "weights": { "priceImpact": 0.35, "slippage": 0.25, "liquidity": 0.25, "exposure": 0.15, "poolRisk": 0.1 }
+        },
+        "simulation": {
+          "priceImpactPct": 15,
+          "slippageBps": 100,
+          "liquidityUsd": 8000,
+          "poolRiskScore": 85,
+          "expectedOutputUsd": 425,
+          "exposurePct": 5
+        },
+        "decisionHash": "ghi789lpblockeddecisionhash000000000000000000000000000003",
+        "timestamp": 1718400120000,
+        "message": "BLOCKED: thin pool LP"
+      }
+    },
+    {
+      "action": {
+        "type": "lp_open",
+        "tokenIn": "USDC",
+        "tokenOut": "SOL",
+        "amountUsd": 50,
+        "slippageBps": 50,
+        "poolAddress": "usdc-sol-main"
+      },
+      "guard": {
+        "action": {
+          "type": "lp_open",
+          "agentId": "agent-1",
+          "inputToken": "USDC",
+          "outputToken": "SOL",
+          "amountUsd": 50,
+          "poolId": "usdc-sol-main",
+          "walletBalanceUsd": 10000
+        },
+        "verdict": "ALLOW",
+        "riskScore": 15,
+        "reasonCodes": [],
+        "breakdown": {
+          "priceImpactScore": 8,
+          "slippageScore": 5,
+          "liquidityScore": 12,
+          "exposureScore": 4,
+          "poolRiskScore": 18,
+          "weights": { "priceImpact": 0.35, "slippage": 0.25, "liquidity": 0.25, "exposure": 0.15, "poolRisk": 0.1 }
+        },
+        "simulation": {
+          "priceImpactPct": 1,
+          "slippageBps": 50,
+          "liquidityUsd": 400000,
+          "poolRiskScore": 18,
+          "expectedOutputUsd": 49.5,
+          "exposurePct": 0.5
+        },
+        "decisionHash": "jkl012lpalloweddecisionhash000000000000000000000000000004",
+        "timestamp": 1718400180000,
+        "message": "ALLOWED: deep pool LP"
+      },
+      "execTxRef": "5demoSolanaLpTxHashCapturedFromRealRun0987654321",
+      "mantleTxHash": "0xdemo_mantle_lp_receipt_hash_def456"
+    }
+  ]
+}

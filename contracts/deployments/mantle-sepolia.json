@@ -1,0 +1,16 @@
+{
+  "chainId": 5003,
+  "network": "mantle-sepolia",
+  "deployedAt": "2026-06-15T07:10:32.343Z",
+  "deployer": "0x99631418b5b783cf8c2cdf05f5cab1803d7bdc48",
+  "contracts": {
+    "ClawShieldDecisionRegistry": "0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316",
+    "ClawShieldVerified": "0xb6b47abd16725cf5dc89a9c29fb0d8181cee605f",
+    "ClawShieldPolicyRegistry": "0x530ca907c2e6be6a9411a887c001c3a4de7668c6",
+    "ClawShieldReputationReader": "0xed719ffc59226afbd301fba2e2b1e905e85cc078"
+  },
+  "erc8004": {
+    "IdentityRegistry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+    "ReputationRegistry": "0x8004B663056A597Dffe9eCcC1965A193B7388713"
+  }
+}

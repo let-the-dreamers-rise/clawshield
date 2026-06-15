@@ -1,0 +1,36 @@
+{
+  "name": "@clawshield/sdk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "clawshield": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./middleware": {
+      "types": "./dist/middleware.d.ts",
+      "import": "./dist/middleware.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "demo": "node dist/cli.js --demo",
+    "docs": "typedoc --out docs src/docs-entry.ts src/index.ts"
+  },
+  "dependencies": {
+    "@clawshield/adapters": "workspace:*",
+    "@clawshield/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typedoc": "^0.27.5",
+    "typescript": "^5.7.2"
+  }
+}

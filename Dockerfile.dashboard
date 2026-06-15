@@ -1,0 +1,19 @@
+FROM node:20-alpine AS base
+RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
+WORKDIR /app
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY apps/dashboard/package.json apps/dashboard/
+COPY packages/clawshield-core/package.json packages/clawshield-core/
+COPY packages/ui/package.json packages/ui/
+COPY packages/react/package.json packages/react/
+RUN pnpm install --frozen-lockfile || pnpm install
+
+COPY . .
+RUN pnpm --filter @clawshield/core build
+RUN pnpm --filter @clawshield/ui build
+RUN pnpm --filter @clawshield/react build
+RUN pnpm --filter @clawshield/dashboard build
+
+EXPOSE 3000
+CMD ["pnpm", "--filter", "@clawshield/dashboard", "start"]

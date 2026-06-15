@@ -1,0 +1,13 @@
+agentId: telegram-bot
+profile: safe
+portfolioUsd: 5000
+maxSlippageBps: 75
+maxExposurePct: 15
+maxDailySpendUsd: 200
+allowlist:
+  - USDC
+  - SOL
+  - USDT
+blocklist:
+  - SCAM
+  - RUG

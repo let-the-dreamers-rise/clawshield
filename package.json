@@ -1,0 +1,27 @@
+{
+  "name": "clawshield",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The safety and reputation layer for autonomous agents that touch money",
+  "scripts": {
+    "build": "pnpm run build:packages && pnpm run build:contracts && pnpm run build:services && pnpm run build:apps",
+    "build:packages": "pnpm --filter @clawshield/core --filter @clawshield/ui --filter @clawshield/react --filter @clawshield/adapters --filter @clawshield/indexer --filter @clawshield/sdk --filter @clawshield/openclaw-skill --filter @clawshield/agent build",
+    "build:contracts": "pnpm --filter @clawshield/contracts build",
+    "build:services": "pnpm --filter @clawshield/api --filter @clawshield/telegram build",
+    "build:apps": "pnpm --filter @clawshield/dashboard build && pnpm --filter @clawshield/landing build",
+    "dev:dashboard": "pnpm --filter @clawshield/dashboard dev",
+    "dev:landing": "pnpm --filter @clawshield/landing dev",
+    "dev:agent": "pnpm --filter @clawshield/agent dev",
+    "demo": "pnpm --filter @clawshield/agent demo",
+    "arena": "pnpm --filter @clawshield/agent arena",
+    "preflight": "node scripts/preflight.mjs",
+    "proof:generate": "node scripts/generate-proof-bundle.mjs",
+    "test": "pnpm -r test",
+    "compile": "pnpm --filter @clawshield/contracts compile",
+    "deploy:contracts": "pnpm --filter @clawshield/contracts deploy"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.12.0"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@clawshield/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@clawshield/core": "workspace:*",
+    "@clawshield/indexer": "workspace:*",
+    "@clawshield/sdk": "workspace:*",
+    "@fastify/rate-limit": "^10.2.1",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.1",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "zod": "^3.24.1",
+    "zod-to-json-schema": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

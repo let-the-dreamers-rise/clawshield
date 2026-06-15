@@ -1,0 +1,11 @@
+{
+  "name": "@clawshield/contracts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/forge-run.mjs build",
+    "test": "node scripts/forge-run.mjs test -vv",
+    "deploy": "node scripts/forge-run.mjs script script/Deploy.s.sol:Deploy --rpc-url mantle_sepolia --broadcast --verify && node scripts/save-deployment.mjs",
+    "deploy:local": "node scripts/forge-run.mjs script script/Deploy.s.sol:Deploy --rpc-url http://127.0.0.1:8545 --broadcast && node scripts/save-deployment.mjs"
+  }
+}

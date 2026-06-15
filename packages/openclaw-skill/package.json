@@ -1,0 +1,33 @@
+{
+  "name": "@clawshield/openclaw-skill",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Add ClawShield safety guard to any OpenClaw/Byreal agent",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "clawshield": {
+    "skillId": "clawshield-guard",
+    "displayName": "ClawShield Guard",
+    "version": "1.0.0",
+    "hooks": ["pre-action", "post-action"],
+    "install": "npx skills add @clawshield/openclaw-skill"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@clawshield/sdk": "workspace:*",
+    "@clawshield/core": "workspace:*",
+    "@clawshield/adapters": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

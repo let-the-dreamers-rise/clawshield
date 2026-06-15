@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-06-15T06:47:47.221Z",
+  "project": "ClawShield",
+  "track": "Agentic Economy (Byreal)",
+  "mantleSepolia": {
+    "chainId": 5003,
+    "explorer": "https://sepolia.mantlescan.xyz",
+    "contracts": {
+      "decisionRegistry": {
+        "address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0x5fbdb2315678afecb367f032d93f642f64180aa3"
+      },
+      "verified": {
+        "address": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+      },
+      "reputationReader": {
+        "address": "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0"
+      }
+    },
+    "erc8004": {
+      "IdentityRegistry": "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+      "ReputationRegistry": "0x8004B663056A597Dffe9eCcC1965A193B7388713"
+    },
+    "sampleReceiptTxs": [
+      {
+        "hash": "0xdemo_mantle_receipt_hash_from_real_run_abc123",
+        "mantlescan": "https://sepolia.mantlescan.xyz/tx/0xdemo_mantle_receipt_hash_from_real_run_abc123"
+      },
+      {
+        "hash": "0xdemo_mantle_lp_receipt_hash_def456",
+        "mantlescan": "https://sepolia.mantlescan.xyz/tx/0xdemo_mantle_lp_receipt_hash_def456"
+      }
+    ]
+  },
+  "solanaByreal": {
+    "executionRefs": [
+      "5demoSolanaSwapTxHashCapturedFromRealRun1234567890",
+      "5demoSolanaLpTxHashCapturedFromRealRun0987654321"
+    ],
+    "note": "Solana swap/LP signatures from Byreal CLI execute (see demo-capture.json)"
+  },
+  "agentStats": {
+    "demoAgentId": "risky-agent",
+    "autonomySteps": 4,
+    "blocks": 2,
+    "allows": 2,
+    "byrealSkillsUsed": [
+      "pools.analyze",
+      "swap.preview",
+      "swap.execute",
+      "positions.open.preview",
+      "positions.open.execute",
+      "clawshield.guard"
+    ]
+  },
+  "verifyCommands": {
+    "demo": "pnpm demo",
+    "preflight": "pnpm preflight",
+    "proofBundle": "node scripts/generate-proof-bundle.mjs"
+  }
+}

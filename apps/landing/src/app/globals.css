@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", ui-monospace, monospace;
+
+  --color-background: #030305;
+  --color-surface: #0a0a10;
+  --color-surface-elevated: #111118;
+  --color-border: #1a1a24;
+
+  --color-emerald: #10b981;
+  --color-cyan: #06b6d4;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
+
+  --color-warn: #f59e0b;
+  --color-block: #ef4444;
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse 100% 60% at 50% -30%, #10b98112, transparent),
+      radial-gradient(ellipse 80% 50% at 80% 20%, #06b6d408, transparent);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #10b981, #06b6d4, #10b981);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-glow {
+    text-shadow: 0 0 80px #10b98130;
+  }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
