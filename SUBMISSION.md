@@ -18,7 +18,7 @@ OpenClaw gave AI agents hands. Byreal gave them DeFi execution on Solana. But no
 
 **ClawShield Verified** is the ISO-style soulbound badge marketplaces filter on. Agents earn Verified, Gold, or Enterprise tiers by meeting public criteria: ERC-8004 identity, zero critical violations, sustained receipt history, average risk below threshold. Any dApp calls `getClawShieldScore(agentId)` on-chain before hiring an agent.
 
-**Stack:** `@byreal-io/byreal-cli` for Solana execution · Mantle Sepolia for receipts + badges · ERC-8004 identity/reputation · OpenClaw skill (`npx skills add @clawshield/openclaw-skill`) · Next.js dashboard (14 routes) · Agent Arena ranked by profit-after-violations.
+**Stack:** `@byreal-io/byreal-cli` for Solana execution · Mantle Sepolia for receipts + badges · ERC-8004 identity/reputation · OpenClaw skill (`npx skills add ./packages/openclaw-skill`) · Next.js dashboard (14 routes) · Agent Arena ranked by profit-after-violations.
 
 **Business model:** verification audits ($99–499/agent), annual renewal, Reputation API ($500–5k/month), enterprise white-label ($5k–50k/year).
 

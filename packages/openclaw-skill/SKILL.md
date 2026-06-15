@@ -5,7 +5,7 @@ Add safety to your Byreal/OpenClaw agent in one command.
 ## Install
 
 ```bash
-npx skills add @clawshield/openclaw-skill
+npx skills add ./packages/openclaw-skill
 ```
 
 ## What it does

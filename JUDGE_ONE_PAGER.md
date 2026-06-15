@@ -37,7 +37,7 @@ Not a surface API wrapper — full `@byreal-io/byreal-cli` integration:
 | `positions open preview` | LP position simulation |
 | `positions open execute` | LP execution on ALLOW |
 
-**OpenClaw skill:** `npx skills add @clawshield/openclaw-skill` — chains guard → Byreal → Mantle receipt in one install.
+**OpenClaw skill:** `npx skills add ./packages/openclaw-skill` — chains guard → Byreal → Mantle receipt in one install.
 
 **Demo:** `pnpm demo` — swap block/replan/execute + LP block/replan/execute in one run.
 

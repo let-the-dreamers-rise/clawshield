@@ -32,7 +32,7 @@ Before every swap or LP position:
 4️⃣ ALLOW → execute on Solana
 5️⃣ Write receipt to @MantleNetwork + ERC-8004
 
-npx skills add @clawshield/openclaw-skill
+npx skills add ./packages/openclaw-skill
 ```
 
 ---

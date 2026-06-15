@@ -7,13 +7,20 @@ import { MOCK_AGENTS } from "@/lib/mock-data";
 import { isContractsConfigured } from "@/lib/contracts";
 import { VerifiedBadge } from "./VerifiedBadge";
 
+// Seeded on Mantle Sepolia via `pnpm seed:mantle` — match live feed agent IDs.
+const ON_CHAIN_AGENTS = [
+  { agentId: "agent-1", name: "agent-1 (RiskHawk)" },
+  { agentId: "agent-2", name: "agent-2" },
+] as const;
+
 export function ComposableQueryWidget({
   defaultAgentId,
 }: {
   defaultAgentId?: string;
 }) {
+  const live = isContractsConfigured();
   const [agentId, setAgentId] = useState(
-    defaultAgentId ?? MOCK_AGENTS[0].agentId
+    defaultAgentId ?? (live ? ON_CHAIN_AGENTS[0].agentId : MOCK_AGENTS[0].agentId)
   );
   const [score, setScore] = useState<DashboardClawShieldScore | null>(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +38,9 @@ export function ComposableQueryWidget({
     query();
   }, [agentId]);
 
-  const live = isContractsConfigured();
+  const agentOptions = live
+    ? [...ON_CHAIN_AGENTS, ...MOCK_AGENTS.map((a) => ({ agentId: a.agentId, name: a.name }))]
+    : MOCK_AGENTS.map((a) => ({ agentId: a.agentId, name: a.name }));
 
   return (
     <div className="rounded-xl border border-gradient bg-surface p-6 glow-cyan">
@@ -61,7 +70,7 @@ export function ComposableQueryWidget({
           onChange={(e) => setAgentId(e.target.value)}
           className="flex-1 rounded-lg border border-border bg-surface-elevated px-3 py-2 text-sm text-text outline-none focus:border-emerald"
         >
-          {MOCK_AGENTS.map((a) => (
+          {agentOptions.map((a) => (
             <option key={a.agentId} value={a.agentId}>
               {a.name}
             </option>
