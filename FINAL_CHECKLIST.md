@@ -22,7 +22,13 @@ pnpm install
 pnpm preflight
 ```
 
-Open dashboard in browser, then:
+Open dashboard in browser, then seed live on-chain receipts (optional but recommended for Mantlescan clicks):
+
+```powershell
+pnpm seed:mantle
+```
+
+Then run the demo:
 
 ```powershell
 pnpm demo
