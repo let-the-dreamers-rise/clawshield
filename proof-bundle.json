@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T06:47:47.221Z",
+  "generatedAt": "2026-06-15T13:53:41.506Z",
   "project": "ClawShield",
   "track": "Agentic Economy (Byreal)",
   "mantleSepolia": {
@@ -7,16 +7,16 @@
     "explorer": "https://sepolia.mantlescan.xyz",
     "contracts": {
       "decisionRegistry": {
-        "address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-        "mantlescan": "https://sepolia.mantlescan.xyz/address/0x5fbdb2315678afecb367f032d93f642f64180aa3"
+        "address": "0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316"
       },
       "verified": {
-        "address": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512",
-        "mantlescan": "https://sepolia.mantlescan.xyz/address/0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+        "address": "0xb6b47abd16725cf5dc89a9c29fb0d8181cee605f",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0xb6b47abd16725cf5dc89a9c29fb0d8181cee605f"
       },
       "reputationReader": {
-        "address": "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
-        "mantlescan": "https://sepolia.mantlescan.xyz/address/0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0"
+        "address": "0xed719ffc59226afbd301fba2e2b1e905e85cc078",
+        "mantlescan": "https://sepolia.mantlescan.xyz/address/0xed719ffc59226afbd301fba2e2b1e905e85cc078"
       }
     },
     "erc8004": {

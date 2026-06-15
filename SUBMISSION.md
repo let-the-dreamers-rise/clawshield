@@ -66,6 +66,7 @@ pnpm dev:landing        # http://localhost:3001
 |----------|---------|
 | ClawShieldDecisionRegistry | `0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316` |
 | ClawShieldVerified | `0xb6b47abd16725cf5dc89a9c29fb0d8181cee605f` |
+| ClawShieldPolicyRegistry | `0x530ca907c2e6be6a9411a887c001c3a4de7668c6` |
 | ClawShieldReputationReader | `0xed719ffc59226afbd301fba2e2b1e905e85cc078` |
 
 **ERC-8004 (pre-deployed on Mantle Sepolia):**
@@ -92,6 +93,6 @@ pnpm dev:landing        # http://localhost:3001
 | Judge One-Pager | [JUDGE_ONE_PAGER.md](JUDGE_ONE_PAGER.md) |
 | Use Case | [USE_CASE.md](USE_CASE.md) |
 | Proof bundle | `pnpm proof:generate` → `proof-bundle.json` |
-| Sample receipt tx | https://sepolia.mantlescan.xyz/tx/0x_SAMPLE_RECEIPT_TX *(fill from live demo)* |
+| Sample receipt tx | https://sepolia.mantlescan.xyz/tx/0x842271d10ce88616557a738721c177cebf9dc132ee1d040c704a3b605615e6b7 |
 
 **Hashtag:** `#MantleAIHackathon`
