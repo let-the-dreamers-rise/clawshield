@@ -66,7 +66,7 @@ export function ByrealIntegrationPanel({
         ))}
       </ol>
 
-      {decision.txHash && (
+      {decision.onChain && decision.txHash && (
         <a
           href={`${MANTLESCAN_URL}/tx/${decision.txHash}`}
           target="_blank"

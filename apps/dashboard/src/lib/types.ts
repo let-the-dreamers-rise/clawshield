@@ -19,6 +19,8 @@ export interface DecisionRecord {
   timestamp: number;
   blockNumber?: bigint;
   txHash?: string;
+  /** True when this record came from a real on-chain DecisionRecorded event (tx resolves on Mantlescan). */
+  onChain?: boolean;
   riskBreakdown?: RiskBreakdown;
   /** Byreal CLI skills invoked for this decision (skill chain) */
   byrealSkillsInvoked?: string[];

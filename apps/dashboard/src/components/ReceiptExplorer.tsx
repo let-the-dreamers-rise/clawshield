@@ -126,7 +126,7 @@ function ReceiptDetail({ decision }: { decision: DecisionRecord }) {
           </div>
         )}
 
-        {decision.txHash && (
+        {decision.onChain && decision.txHash && (
           <a
             href={mantlescanTx(decision.txHash)}
             target="_blank"

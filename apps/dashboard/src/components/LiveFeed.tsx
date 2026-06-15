@@ -111,7 +111,7 @@ export function LiveFeed({
                       {agent?.name ?? decision.agentId}
                     </Link>
                     <span>{timeAgo(decision.timestamp)}</span>
-                    {decision.txHash && (
+                    {decision.onChain && decision.txHash && (
                       <a
                         href={mantlescanTx(decision.txHash)}
                         target="_blank"
