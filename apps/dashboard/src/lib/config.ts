@@ -1,14 +1,15 @@
-export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://https://github.com/let-the-dreamers-rise/clawshield";
+export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/let-the-dreamers-rise/clawshield";
 export const LANDING_URL = process.env.NEXT_PUBLIC_LANDING_URL ?? "http://localhost:3001";
 
 export const CONTRACTS = {
-  decisionRegistry: process.env.NEXT_PUBLIC_DECISION_REGISTRY ?? "",
-  verified: process.env.NEXT_PUBLIC_VERIFIED ?? "",
-  reputationReader: process.env.NEXT_PUBLIC_REPUTATION_READER ?? "",
+  decisionRegistry: process.env.NEXT_PUBLIC_DECISION_REGISTRY_ADDRESS ?? "",
+  verified: process.env.NEXT_PUBLIC_VERIFIED_ADDRESS ?? "",
+  reputationReader: process.env.NEXT_PUBLIC_REPUTATION_READER_ADDRESS ?? "",
+  policyRegistry: process.env.NEXT_PUBLIC_POLICY_REGISTRY_ADDRESS ?? "",
   erc8004Identity: process.env.NEXT_PUBLIC_ERC8004_IDENTITY ?? "0x8004A818BFB912233c491871b3d84c89A494BD9e",
   erc8004Reputation: process.env.NEXT_PUBLIC_ERC8004_REPUTATION ?? "0x8004B663056A597Dffe9eCcC1965A193B7388713",
   rpcUrl: process.env.NEXT_PUBLIC_MANTLE_RPC_URL ?? "https://rpc.sepolia.mantle.xyz",
-  explorer: "https://sepolia.mantlescan.xyz",
+  explorer: process.env.NEXT_PUBLIC_MANTLESCAN_URL ?? "https://sepolia.mantlescan.xyz",
 };
 
 export const DEMO_AGENTS = [

@@ -86,9 +86,12 @@ export async function fetchDecisionEvents(
         execTxRef: string;
       };
 
+      const agentBytes = Buffer.from(args.agentId.slice(2), "hex");
+      const agentIdStr = agentBytes.toString("utf8").replace(/\0/g, "") || args.agentId;
+
       return {
         id: `onchain-${i}`,
-        agentId: args.agentId.slice(0, 18),
+        agentId: agentIdStr,
         decisionHash: args.decisionHash,
         actionType: actionTypeFromUint(Number(args.actionType)),
         riskScore: Number(args.riskScore),

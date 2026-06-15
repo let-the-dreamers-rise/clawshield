@@ -1,25 +1,29 @@
 import type { Address } from "viem";
 
+function envAddress(key: string): Address | undefined {
+  const raw = process.env[key]?.trim().replace(/^["']|["']$/g, "");
+  return raw ? (raw as Address) : undefined;
+}
+
 export const MANTLE_RPC =
-  process.env.NEXT_PUBLIC_MANTLE_RPC_URL ?? "https://rpc.sepolia.mantle.xyz";
+  process.env.NEXT_PUBLIC_MANTLE_RPC_URL?.trim() ?? "https://rpc.sepolia.mantle.xyz";
 
-export const DECISION_REGISTRY =
-  (process.env.NEXT_PUBLIC_DECISION_REGISTRY_ADDRESS as Address) || undefined;
+export const DECISION_REGISTRY = envAddress("NEXT_PUBLIC_DECISION_REGISTRY_ADDRESS");
 
-export const REPUTATION_READER =
-  (process.env.NEXT_PUBLIC_REPUTATION_READER_ADDRESS as Address) || undefined;
+export const REPUTATION_READER = envAddress("NEXT_PUBLIC_REPUTATION_READER_ADDRESS");
 
-export const VERIFIED_CONTRACT =
-  (process.env.NEXT_PUBLIC_VERIFIED_ADDRESS as Address) || undefined;
+export const VERIFIED_CONTRACT = envAddress("NEXT_PUBLIC_VERIFIED_ADDRESS");
+
+export const POLICY_REGISTRY = envAddress("NEXT_PUBLIC_POLICY_REGISTRY_ADDRESS");
 
 export const MANTLESCAN_URL =
-  process.env.NEXT_PUBLIC_MANTLESCAN_URL ?? "https://sepolia.mantlescan.xyz";
+  process.env.NEXT_PUBLIC_MANTLESCAN_URL?.trim() ?? "https://sepolia.mantlescan.xyz";
 
 export const LANDING_URL =
   process.env.NEXT_PUBLIC_LANDING_URL ?? "http://localhost:3001";
 
 export const GITHUB_URL =
-  process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://https://github.com/let-the-dreamers-rise/clawshield";
+  process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/let-the-dreamers-rise/clawshield";
 
 export const CHAIN_ID = 5003;
 

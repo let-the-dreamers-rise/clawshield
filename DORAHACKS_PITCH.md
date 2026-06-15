@@ -46,8 +46,8 @@ Every allow AND block → permanent Mantle receipt
 ClawShield Verified = soulbound badge marketplaces filter on
 getClawShieldScore(agentId) — composable on-chain trust
 
-📊 Dashboard: [URL]
-💻 GitHub: https://https://github.com/let-the-dreamers-rise/clawshield
+📊 Dashboard: https://dashboard-ashwin-goyals-projects.vercel.app
+💻 GitHub: https://github.com/let-the-dreamers-rise/clawshield
 🔗 Contracts: sepolia.mantlescan.xyz
 
 #MantleAIHackathon
@@ -58,6 +58,5 @@ getClawShieldScore(agentId) — composable on-chain trust
 ## Posting Checklist
 
 - [ ] Replace `[VIDEO]` with YouTube/Loom link
-- [ ] Replace `[URL]` with live Vercel dashboard URL
 - [ ] Tag @Byreal, @MantleNetwork, @DoraHacks if character count allows
 - [ ] Attach 15–30s clip (BLOCK moment) as video preview on tweet 1

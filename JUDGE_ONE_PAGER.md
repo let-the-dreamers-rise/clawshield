@@ -58,9 +58,10 @@ No human approval step. Structured `reasonCodes` drive replanning.
 
 | What | Mantlescan Link |
 |------|-----------------|
-| DecisionRegistry (black box) | https://sepolia.mantlescan.xyz/address/0x5fbdb2315678afecb367f032d93f642f64180aa3 |
-| ClawShieldVerified (badges) | https://sepolia.mantlescan.xyz/address/0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 |
-| ReputationReader (scores) | https://sepolia.mantlescan.xyz/address/0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0 |
+| DecisionRegistry (black box) | https://sepolia.mantlescan.xyz/address/0x30f0bab7ed9064f07c1aa7b3bfbc6d8ea25fa316 |
+| ClawShieldVerified (badges) | https://sepolia.mantlescan.xyz/address/0xb6b47abd16725cf5dc89a9c29fb0d8181cee605f |
+| PolicyRegistry | https://sepolia.mantlescan.xyz/address/0x530ca907c2e6be6a9411a887c001c3a4de7668c6 |
+| ReputationReader (scores) | https://sepolia.mantlescan.xyz/address/0xed719ffc59226afbd301fba2e2b1e905e85cc078 |
 | ERC-8004 Identity | https://sepolia.mantlescan.xyz/address/0x8004A818BFB912233c491871b3d84c89A494BD9e |
 | ERC-8004 Reputation | https://sepolia.mantlescan.xyz/address/0x8004B663056A597Dffe9eCcC1965A193B7388713 |
 
@@ -87,8 +88,8 @@ Dashboard live feed → any decision row → **View on Mantlescan** → decode `
 pnpm install && pnpm preflight && pnpm demo
 ```
 
-- **Dashboard:** *(Vercel URL)* — live feed, risk math, arena, `/verify` badge criteria
-- **GitHub:** https://https://github.com/let-the-dreamers-rise/clawshield
+- **Dashboard:** https://dashboard-ashwin-goyals-projects.vercel.app — live feed, risk math, arena, `/verify` badge criteria
+- **GitHub:** https://github.com/let-the-dreamers-rise/clawshield
 - **Video:** *(link)* — 3:30 walkthrough hitting all 9 criteria ([script](VIDEO.md))
 - **Scorecard:** [SCORECARD.md](SCORECARD.md) — criterion-by-criterion proof map
 

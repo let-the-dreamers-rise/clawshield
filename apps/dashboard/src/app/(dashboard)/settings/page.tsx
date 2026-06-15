@@ -12,6 +12,7 @@ interface Settings {
   decisionRegistry: string;
   verified: string;
   reputationReader: string;
+  policyRegistry: string;
   webhookUrl: string;
 }
 
@@ -20,6 +21,7 @@ const defaults: Settings = {
   decisionRegistry: CONTRACTS.decisionRegistry,
   verified: CONTRACTS.verified,
   reputationReader: CONTRACTS.reputationReader,
+  policyRegistry: CONTRACTS.policyRegistry,
   webhookUrl: "",
 };
 
@@ -116,6 +118,7 @@ export default function SettingsPage() {
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {([
               ["Decision Registry", "decisionRegistry"],
+              ["Policy Registry", "policyRegistry"],
               ["Verified Badges", "verified"],
               ["Reputation Reader", "reputationReader"],
             ] as const).map(([label, key]) => (

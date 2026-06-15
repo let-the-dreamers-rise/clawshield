@@ -16,6 +16,7 @@
     "arena": "pnpm --filter @clawshield/agent arena",
     "preflight": "node scripts/preflight.mjs",
     "proof:generate": "node scripts/generate-proof-bundle.mjs",
+    "seed:mantle": "pnpm --filter @clawshield/agent seed:mantle",
     "test": "pnpm -r test",
     "compile": "pnpm --filter @clawshield/contracts compile",
     "deploy:contracts": "pnpm --filter @clawshield/contracts deploy"
